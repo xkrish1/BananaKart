@@ -15,7 +15,7 @@ router = APIRouter()
 class AnalyzeRequest(BaseModel):
     user_id: UUID = Field(..., description="Supabase user identifier")
     recipe_text: str = Field(..., min_length=1, description="Raw recipe text to analyze")
-    urgency: str = Field(..., regex=r"^(tonight|soon|later)$", description="Desired recipe urgency")
+    urgency: str = Field(..., pattern=r"^(tonight|soon|later)$", description="Desired recipe urgency")
 
 
 class AnalyzeResponse(BaseModel):
