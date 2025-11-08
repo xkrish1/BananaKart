@@ -1,0 +1,460 @@
+[
+  {
+    "id": 1001,
+    "title": "Fresh Avocado Toast",
+    "ingredients": [
+      "2 slices multigrain bread",
+      "1 ripe avocado",
+      "1 tsp olive oil",
+      "pinch sea salt"
+    ],
+    "description": "Breakfast staple from Food.com community upload 2012."
+  },
+  {
+    "id": 1002,
+    "title": "Banana Oat Smoothie",
+    "ingredients": [
+      "1 banana",
+      "0.5 cup rolled oats",
+      "1 cup almond milk",
+      "1 tbsp honey"
+    ],
+    "description": "Food.com test kitchen quick blender breakfast."
+  },
+  {
+    "id": 1003,
+    "title": "Tomato Basil Pasta",
+    "ingredients": [
+      "8 oz spaghetti",
+      "2 tbsp olive oil",
+      "3 cloves garlic",
+      "2 cups cherry tomatoes",
+      "0.25 cup basil leaves"
+    ],
+    "description": "Weeknight pasta from Food.com summer produce roundup."
+  },
+  {
+    "id": 1004,
+    "title": "Kale Quinoa Salad",
+    "ingredients": [
+      "3 cups chopped kale",
+      "1 cup cooked quinoa",
+      "0.5 cup chickpeas",
+      "2 tbsp lemon juice",
+      "1 tbsp olive oil"
+    ],
+    "description": "Food.com editors highlight this plant-based salad."
+  },
+  {
+    "id": 1005,
+    "title": "Almond Energy Bites",
+    "ingredients": [
+      "1 cup almond butter",
+      "0.5 cup oats",
+      "0.25 cup cacao nibs",
+      "2 tbsp maple syrup"
+    ],
+    "description": "No-bake snack from Food.com fuel collection."
+  },
+  {
+    "id": 1006,
+    "title": "Spiced Chickpea Stew",
+    "ingredients": [
+      "2 cups cooked chickpeas",
+      "1 cup crushed tomatoes",
+      "1 cup vegetable broth",
+      "1 tsp cumin",
+      "0.5 tsp smoked paprika"
+    ],
+    "description": "North African inspired stew saved to Food.com favorites."
+  },
+  {
+    "id": 1007,
+    "title": "Lentil Vegetable Soup",
+    "ingredients": [
+      "1 cup brown lentils",
+      "4 cups water",
+      "1 cup diced carrots",
+      "1 cup celery",
+      "1 tsp thyme"
+    ],
+    "description": "Budget slow cooker soup archived on Food.com."
+  },
+  {
+    "id": 1008,
+    "title": "Ginger Tofu Stir Fry",
+    "ingredients": [
+      "14 oz firm tofu",
+      "2 cups broccoli florets",
+      "1 cup snow peas",
+      "2 tbsp soy sauce",
+      "1 tbsp grated ginger"
+    ],
+    "description": "Wok-ready tofu dinner sourced from Food.com upload."
+  },
+  {
+    "id": 1009,
+    "title": "Salmon Brown Rice Bowl",
+    "ingredients": [
+      "2 salmon fillets",
+      "2 cups cooked brown rice",
+      "1 cup steamed edamame",
+      "1 tbsp sesame oil",
+      "1 tbsp lime juice"
+    ],
+    "description": "Omega rich bowl curated in Food.com meal plan."
+  },
+  {
+    "id": 1010,
+    "title": "Slow Cooker Beef Stew",
+    "ingredients": [
+      "1.5 lb beef chuck",
+      "3 cups potatoes",
+      "2 cups carrots",
+      "1 cup peas",
+      "2 cups beef broth"
+    ],
+    "description": "Comfort classic from Food.com cold weather collection."
+  },
+  {
+    "id": 1011,
+    "title": "Sheet Pan Chicken Fajitas",
+    "ingredients": [
+      "1 lb chicken breast",
+      "2 bell peppers",
+      "1 red onion",
+      "1 tbsp chili powder",
+      "1 tbsp olive oil"
+    ],
+    "description": "One-pan supper submitted to Food.com weeknight board."
+  },
+  {
+    "id": 1012,
+    "title": "Cinnamon Oatmeal Cookies",
+    "ingredients": [
+      "1.5 cups oats",
+      "1 cup flour",
+      "0.5 cup butter",
+      "0.75 cup brown sugar",
+      "1 tsp cinnamon"
+    ],
+    "description": "Bake sale treat cataloged in Food.com dessert index."
+  },
+  {
+    "id": 1013,
+    "title": "Spinach Kiwi Smoothie",
+    "ingredients": [
+      "2 cups spinach",
+      "2 kiwis",
+      "1 cup coconut water",
+      "1 tbsp chia seeds"
+    ],
+    "description": "Blender drink featured in Food.com wellness reboot."
+  },
+  {
+    "id": 1014,
+    "title": "Carrot Ginger Soup",
+    "ingredients": [
+      "4 cups chopped carrots",
+      "1 tbsp grated ginger",
+      "3 cups vegetable broth",
+      "0.5 cup coconut milk"
+    ],
+    "description": "Pureed soup recorded on Food.com detox list."
+  },
+  {
+    "id": 1015,
+    "title": "Potato Leek Soup",
+    "ingredients": [
+      "4 russet potatoes",
+      "2 leeks",
+      "3 cups chicken broth",
+      "0.5 cup cream",
+      "1 tbsp butter"
+    ],
+    "description": "Classic soup recipe ported from Food.com cards."
+  },
+  {
+    "id": 1016,
+    "title": "Mushroom Barley Risotto",
+    "ingredients": [
+      "2 cups cremini mushrooms",
+      "1 cup pearl barley",
+      "4 cups vegetable stock",
+      "0.25 cup white wine",
+      "2 tbsp parmesan"
+    ],
+    "description": "Whole grain risotto spin published on Food.com."
+  },
+  {
+    "id": 1017,
+    "title": "Broccoli Cheddar Bake",
+    "ingredients": [
+      "3 cups broccoli florets",
+      "1 cup cheddar",
+      "1 cup milk",
+      "2 eggs",
+      "0.5 cup breadcrumbs"
+    ],
+    "description": "Family casserole sourced from Food.com potluck."
+  },
+  {
+    "id": 1018,
+    "title": "Zucchini Noodle Marinara",
+    "ingredients": [
+      "3 zucchinis spiralized",
+      "2 cups marinara sauce",
+      "0.5 cup mushrooms",
+      "1 tbsp olive oil"
+    ],
+    "description": "Low-carb spin from Food.com keto roundup."
+  },
+  {
+    "id": 1019,
+    "title": "Sweet Potato Black Bean Chili",
+      "ingredients": [
+      "2 cups diced sweet potatoes",
+      "1.5 cups black beans",
+      "1 cup tomatoes",
+      "1 tbsp chili powder"
+    ],
+    "description": "Meatless chili beloved by Food.com reviewers."
+  },
+  {
+    "id": 1020,
+    "title": "Apple Cinnamon Porridge",
+    "ingredients": [
+      "1 cup steel cut oats",
+      "2 cups water",
+      "1 apple diced",
+      "1 tsp cinnamon",
+      "1 tbsp maple syrup"
+    ],
+    "description": "Cozy breakfast logged by Food.com moderators."
+  },
+  {
+    "id": 1021,
+    "title": "Berry Chia Pudding",
+    "ingredients": [
+      "0.25 cup chia seeds",
+      "1 cup oat milk",
+      "0.5 cup mixed berries",
+      "1 tsp vanilla"
+    ],
+    "description": "Prep-ahead snack inside Food.com plant-forward pack."
+  },
+  {
+    "id": 1022,
+    "title": "Peanut Butter Granola Bars",
+    "ingredients": [
+      "1 cup peanut butter",
+      "2 cups rolled oats",
+      "0.25 cup flaxseed",
+      "0.25 cup chocolate chips"
+    ],
+    "description": "Lunchbox bar idea curated from Food.com community."
+  },
+  {
+    "id": 1023,
+    "title": "Turmeric Cauliflower Rice",
+    "ingredients": [
+      "1 head cauliflower",
+      "1 tsp turmeric",
+      "1 tbsp olive oil",
+      "0.25 cup peas"
+    ],
+    "description": "Side dish published on Food.com spice trail."
+  },
+  {
+    "id": 1024,
+    "title": "Black Bean Street Tacos",
+    "ingredients": [
+      "1.5 cups black beans",
+      "8 corn tortillas",
+      "1 cup shredded lettuce",
+      "0.5 cup salsa",
+      "0.25 cup cotija"
+    ],
+    "description": "Taco truck inspired bites from Food.com editors."
+  },
+  {
+    "id": 1025,
+    "title": "Crunchy Cabbage Slaw",
+    "ingredients": [
+      "3 cups shredded cabbage",
+      "1 cup carrots",
+      "0.25 cup rice vinegar",
+      "1 tbsp sesame oil"
+    ],
+    "description": "Side dish stored in Food.com grill companion list."
+  },
+  {
+    "id": 1026,
+    "title": "Pea Mint Dip",
+    "ingredients": [
+      "2 cups green peas",
+      "0.25 cup mint leaves",
+      "1 tbsp lemon juice",
+      "1 tbsp olive oil"
+    ],
+    "description": "Spring appetizer documented within Food.com brunch."
+  },
+  {
+    "id": 1027,
+    "title": "Beet Hummus",
+    "ingredients": [
+      "1.5 cups chickpeas",
+      "1 cup roasted beets",
+      "2 tbsp tahini",
+      "1 tbsp lemon juice"
+    ],
+    "description": "Vibrant spread pinned on Food.com dip board."
+  },
+  {
+    "id": 1028,
+    "title": "Mango Lime Salsa",
+    "ingredients": [
+      "2 mangos",
+      "0.25 cup red onion",
+      "1 jalapeno",
+      "1 tbsp lime juice"
+    ],
+    "description": "Taco topper from Food.com summer grill guide."
+  },
+  {
+    "id": 1029,
+    "title": "Pineapple Fried Rice",
+    "ingredients": [
+      "3 cups cooked rice",
+      "1 cup pineapple chunks",
+      "0.5 cup peas",
+      "2 eggs",
+      "2 tbsp soy sauce"
+    ],
+    "description": "Thai takeout copycat adapted on Food.com."
+  },
+  {
+    "id": 1030,
+    "title": "Herb Roast Turkey Breast",
+    "ingredients": [
+      "2 lb turkey breast",
+      "2 tbsp rosemary",
+      "2 tbsp olive oil",
+      "1 tbsp garlic powder"
+    ],
+    "description": "Holiday entree posted on Food.com festive board."
+  },
+  {
+    "id": 1031,
+    "title": "Citrus Roasted Beets",
+    "ingredients": [
+      "3 cups beets",
+      "1 orange",
+      "1 tbsp olive oil",
+      "1 tsp thyme"
+    ],
+    "description": "Sheet pan veggie idea mirrored from Food.com."
+  },
+  {
+    "id": 1032,
+    "title": "Garlic Herb Tempeh",
+    "ingredients": [
+      "8 oz tempeh",
+      "1 tbsp olive oil",
+      "2 cloves garlic",
+      "1 tsp oregano"
+    ],
+    "description": "Protein swap from Food.com meatless mains."
+  },
+  {
+    "id": 1033,
+    "title": "Quinoa Stuffed Peppers",
+    "ingredients": [
+      "4 bell peppers",
+      "1.5 cups cooked quinoa",
+      "1 cup black beans",
+      "0.5 cup corn",
+      "0.5 cup tomato sauce"
+    ],
+    "description": "Meal prep winner on Food.com vegetarian table."
+  },
+  {
+    "id": 1034,
+    "title": "Coconut Lentil Curry",
+    "ingredients": [
+      "1 cup red lentils",
+      "1 can coconut milk",
+      "1 cup tomatoes",
+      "1 tbsp curry powder"
+    ],
+    "description": "Pantry dinner idea saved to Food.com thrifty list."
+  },
+  {
+    "id": 1035,
+    "title": "Roasted Brussels Sprouts",
+    "ingredients": [
+      "4 cups brussels sprouts",
+      "1 tbsp olive oil",
+      "0.5 tsp sea salt",
+      "0.25 tsp black pepper"
+    ],
+    "description": "Sheet pan veg referenced in Food.com basics class."
+  },
+  {
+    "id": 1036,
+    "title": "Maple Glazed Carrots",
+    "ingredients": [
+      "3 cups carrots",
+      "2 tbsp maple syrup",
+      "1 tbsp butter",
+      "0.5 tsp cumin"
+    ],
+    "description": "Side dish idea shared on Food.com harvest feed."
+  },
+  {
+    "id": 1037,
+    "title": "Crispy Baked Tofu Bites",
+    "ingredients": [
+      "16 oz extra firm tofu",
+      "2 tbsp cornstarch",
+      "1 tbsp soy sauce",
+      "1 tsp garlic powder"
+    ],
+    "description": "Airy snack from Food.com vegan swaps."
+  },
+  {
+    "id": 1038,
+    "title": "Lemony Farro Salad",
+    "ingredients": [
+      "2 cups cooked farro",
+      "1 cup arugula",
+      "0.5 cup cherry tomatoes",
+      "2 tbsp lemon juice",
+      "2 tbsp olive oil"
+    ],
+    "description": "Whole grain bowl on Food.com Mediterranean board."
+  },
+  {
+    "id": 1039,
+    "title": "Oat Banana Pancakes",
+    "ingredients": [
+      "1 cup oats",
+      "1 banana",
+      "2 eggs",
+      "0.5 tsp baking powder"
+    ],
+    "description": "Breakfast remix from Food.com griddle fest."
+  },
+  {
+    "id": 1040,
+    "title": "Smoky Tempeh BLT",
+    "ingredients": [
+      "6 oz tempeh",
+      "4 slices whole wheat bread",
+      "2 tbsp vegan mayo",
+      "2 leaves lettuce",
+      "2 slices tomato"
+    ],
+    "description": "Plant sandwich version recorded on Food.com."
+  }
+]

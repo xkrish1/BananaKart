@@ -1,0 +1,322 @@
+[
+  {
+    "input": "fresh avocado toast | ingredients: 2 slices multigrain bread, 1 ripe avocado, 1 teaspoon olive oil, pinch sea salt | description: breakfast staple from food.com community upload 2012.",
+    "label": {
+      "ingredient": "avocado",
+      "local": false,
+      "co2": 2.3
+    }
+  },
+  {
+    "input": "banana oat smoothie | ingredients: 1 banana, 0.5 cup rolled oats, 1 cup almond milk, 1 tablespoon honey | description: food.com test kitchen quick blender breakfast.",
+    "label": {
+      "ingredient": "banana",
+      "local": false,
+      "co2": 0.9
+    }
+  },
+  {
+    "input": "tomato basil pasta | ingredients: 8 ounces spaghetti, 2 tablespoon olive oil, 3 cloves garlic, 2 cups cherry tomatoes, 0.25 cup basil leaves | description: weeknight pasta from food.com summer produce roundup.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "kale quinoa salad | ingredients: 3 cups chopped kale, 1 cup cooked quinoa, 0.5 cup chickpeas, 2 tablespoon lemon juice, 1 tablespoon olive oil | description: food.com editors highlight this plant-based salad.",
+    "label": {
+      "ingredient": "kale",
+      "local": true,
+      "co2": 0.6
+    }
+  },
+  {
+    "input": "almond energy bites | ingredients: 1 cup almond butter, 0.5 cup oats, 0.25 cup cacao nibs, 2 tablespoon maple syrup | description: no-bake snack from food.com fuel collection.",
+    "label": {
+      "ingredient": "almond",
+      "local": false,
+      "co2": 2.8
+    }
+  },
+  {
+    "input": "spiced chickpea stew | ingredients: 2 cups cooked chickpeas, 1 cup crushed tomatoes, 1 cup vegetable broth, 1 teaspoon cumin, 0.5 teaspoon smoked paprika | description: north african inspired stew saved to food.com favorites.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "lentil vegetable soup | ingredients: 1 cup brown lentils, 4 cups water, 1 cup diced carrots, 1 cup celery, 1 teaspoon thyme | description: budget slow cooker soup archived on food.com.",
+    "label": {
+      "ingredient": "lentil",
+      "local": true,
+      "co2": 0.9
+    }
+  },
+  {
+    "input": "ginger tofu stir fry | ingredients: 14 ounces firm tofu, 2 cups broccoli florets, 1 cup snow peas, 2 tablespoon soy sauce, 1 tablespoon grated ginger | description: wok-ready tofu dinner sourced from food.com upload.",
+    "label": {
+      "ingredient": "tofu",
+      "local": true,
+      "co2": 2.0
+    }
+  },
+  {
+    "input": "salmon brown rice bowl | ingredients: 2 salmon fillets, 2 cups cooked brown rice, 1 cup steamed edamame, 1 tablespoon sesame oil, 1 tablespoon lime juice | description: omega rich bowl curated in food.com meal plan.",
+    "label": {
+      "ingredient": "salmon",
+      "local": false,
+      "co2": 4.9
+    }
+  },
+  {
+    "input": "slow cooker beef stew | ingredients: 1.5 pound beef chuck, 3 cups potatoes, 2 cups carrots, 1 cup peas, 2 cups beef broth | description: comfort classic from food.com cold weather collection.",
+    "label": {
+      "ingredient": "beef",
+      "local": false,
+      "co2": 27.0
+    }
+  },
+  {
+    "input": "sheet pan chicken fajitas | ingredients: 1 pound chicken breast, 2 bell peppers, 1 red onion, 1 tablespoon chili powder, 1 tablespoon olive oil | description: one-pan supper submitted to food.com weeknight board.",
+    "label": {
+      "ingredient": "chicken",
+      "local": false,
+      "co2": 6.9
+    }
+  },
+  {
+    "input": "cinnamon oatmeal cookies | ingredients: 1.5 cups oats, 1 cup flour, 0.5 cup butter, 0.75 cup brown sugar, 1 teaspoon cinnamon | description: bake sale treat cataloged in food.com dessert index.",
+    "label": {
+      "ingredient": "oat",
+      "local": true,
+      "co2": 1.4
+    }
+  },
+  {
+    "input": "spinach kiwi smoothie | ingredients: 2 cups spinach, 2 kiwis, 1 cup coconut water, 1 tablespoon chia seeds | description: blender drink featured in food.com wellness reboot.",
+    "label": {
+      "ingredient": "spinach",
+      "local": true,
+      "co2": 0.5
+    }
+  },
+  {
+    "input": "carrot ginger soup | ingredients: 4 cups chopped carrots, 1 tablespoon grated ginger, 3 cups vegetable broth, 0.5 cup coconut milk | description: pureed soup recorded on food.com detox list.",
+    "label": {
+      "ingredient": "carrot",
+      "local": true,
+      "co2": 0.3
+    }
+  },
+  {
+    "input": "potato leek soup | ingredients: 4 russet potatoes, 2 leeks, 3 cups chicken broth, 0.5 cup cream, 1 tablespoon butter | description: classic soup recipe ported from food.com cards.",
+    "label": {
+      "ingredient": "chicken",
+      "local": false,
+      "co2": 6.9
+    }
+  },
+  {
+    "input": "mushroom barley risotto | ingredients: 2 cups cremini mushrooms, 1 cup pearl barley, 4 cups vegetable stock, 0.25 cup white wine, 2 tablespoon parmesan | description: whole grain risotto spin published on food.com.",
+    "label": {
+      "ingredient": "mushroom",
+      "local": true,
+      "co2": 1.0
+    }
+  },
+  {
+    "input": "broccoli cheddar bake | ingredients: 3 cups broccoli florets, 1 cup cheddar, 1 cup milk, 2 eggs, 0.5 cup breadcrumbs | description: family casserole sourced from food.com potluck.",
+    "label": {
+      "ingredient": "broccoli",
+      "local": true,
+      "co2": 0.6
+    }
+  },
+  {
+    "input": "zucchini noodle marinara | ingredients: 3 zucchinis spiralized, 2 cups marinara sauce, 0.5 cup mushrooms, 1 tablespoon olive oil | description: low-carb spin from food.com keto roundup.",
+    "label": {
+      "ingredient": "mushroom",
+      "local": true,
+      "co2": 1.0
+    }
+  },
+  {
+    "input": "sweet potato black bean chili | ingredients: 2 cups diced sweet potatoes, 1.5 cups black beans, 1 cup tomatoes, 1 tablespoon chili powder | description: meatless chili beloved by food.com reviewers.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "apple cinnamon porridge | ingredients: 1 cup steel cut oats, 2 cups water, 1 apple diced, 1 teaspoon cinnamon, 1 tablespoon maple syrup | description: cozy breakfast logged by food.com moderators.",
+    "label": {
+      "ingredient": "oat",
+      "local": true,
+      "co2": 1.4
+    }
+  },
+  {
+    "input": "berry chia pudding | ingredients: 0.25 cup chia seeds, 1 cup oat milk, 0.5 cup mixed berries, 1 teaspoon vanilla | description: prep-ahead snack inside food.com plant-forward pack.",
+    "label": {
+      "ingredient": "oat",
+      "local": true,
+      "co2": 1.4
+    }
+  },
+  {
+    "input": "peanut butter granola bars | ingredients: 1 cup peanut butter, 2 cups rolled oats, 0.25 cup flaxseed, 0.25 cup chocolate chips | description: lunchbox bar idea curated from food.com community.",
+    "label": {
+      "ingredient": "oat",
+      "local": true,
+      "co2": 1.4
+    }
+  },
+  {
+    "input": "turmeric cauliflower rice | ingredients: 1 head cauliflower, 1 teaspoon turmeric, 1 tablespoon olive oil, 0.25 cup peas | description: side dish published on food.com spice trail.",
+    "label": {
+      "ingredient": "cauliflower",
+      "local": true,
+      "co2": 0.5
+    }
+  },
+  {
+    "input": "black bean street tacos | ingredients: 1.5 cups black beans, 8 corn tortillas, 1 cup shredded lettuce, 0.5 cup salsa, 0.25 cup cotija | description: taco truck inspired bites from food.com editors.",
+    "label": {
+      "ingredient": "black bean",
+      "local": true,
+      "co2": 1.0
+    }
+  },
+  {
+    "input": "crunchy cabbage slaw | ingredients: 3 cups shredded cabbage, 1 cup carrots, 0.25 cup rice vinegar, 1 tablespoon sesame oil | description: side dish stored in food.com grill companion list.",
+    "label": {
+      "ingredient": "carrot",
+      "local": true,
+      "co2": 0.3
+    }
+  },
+  {
+    "input": "pea mint dip | ingredients: 2 cups green peas, 0.25 cup mint leaves, 1 tablespoon lemon juice, 1 tablespoon olive oil | description: spring appetizer documented within food.com brunch.",
+    "label": {
+      "ingredient": "pea",
+      "local": true,
+      "co2": 0.3
+    }
+  },
+  {
+    "input": "beet hummus | ingredients: 1.5 cups chickpeas, 1 cup roasted beets, 2 tablespoon tahini, 1 tablespoon lemon juice | description: vibrant spread pinned on food.com dip board.",
+    "label": {
+      "ingredient": "chickpea",
+      "local": true,
+      "co2": 1.1
+    }
+  },
+  {
+    "input": "mango lime salsa | ingredients: 2 mangos, 0.25 cup red onion, 1 jalapeno, 1 tablespoon lime juice | description: taco topper from food.com summer grill guide.",
+    "label": {
+      "ingredient": "mango",
+      "local": false,
+      "co2": 1.5
+    }
+  },
+  {
+    "input": "pineapple fried rice | ingredients: 3 cups cooked rice, 1 cup pineapple chunks, 0.5 cup peas, 2 eggs, 2 tablespoon soy sauce | description: thai takeout copycat adapted on food.com.",
+    "label": {
+      "ingredient": "apple",
+      "local": true,
+      "co2": 0.5
+    }
+  },
+  {
+    "input": "herb roast turkey breast | ingredients: 2 pound turkey breast, 2 tablespoon rosemary, 2 tablespoon olive oil, 1 tablespoon garlic powder | description: holiday entree posted on food.com festive board.",
+    "label": {
+      "ingredient": "turkey",
+      "local": false,
+      "co2": 10.9
+    }
+  },
+  {
+    "input": "citrus roasted beets | ingredients: 3 cups beets, 1 orange, 1 tablespoon olive oil, 1 teaspoon thyme | description: sheet pan veggie idea mirrored from food.com.",
+    "label": {
+      "ingredient": "beet",
+      "local": true,
+      "co2": 0.3
+    }
+  },
+  {
+    "input": "garlic herb tempeh | ingredients: 8 ounces tempeh, 1 tablespoon olive oil, 2 cloves garlic, 1 teaspoon oregano | description: protein swap from food.com meatless mains.",
+    "label": {
+      "ingredient": "tempeh",
+      "local": true,
+      "co2": 1.8
+    }
+  },
+  {
+    "input": "quinoa stuffed peppers | ingredients: 4 bell peppers, 1.5 cups cooked quinoa, 1 cup black beans, 0.5 cup corn, 0.5 cup tomato sauce | description: meal prep winner on food.com vegetarian table.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "coconut lentil curry | ingredients: 1 cup red lentils, 1 can coconut milk, 1 cup tomatoes, 1 tablespoon curry powder | description: pantry dinner idea saved to food.com thrifty list.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "roasted brussels sprouts | ingredients: 4 cups brussels sprouts, 1 tablespoon olive oil, 0.5 teaspoon sea salt, 0.25 teaspoon black pepper | description: sheet pan veg referenced in food.com basics class.",
+    "label": {
+      "ingredient": "mixed produce",
+      "local": true,
+      "co2": 1.5
+    }
+  },
+  {
+    "input": "maple glazed carrots | ingredients: 3 cups carrots, 2 tablespoon maple syrup, 1 tablespoon butter, 0.5 teaspoon cumin | description: side dish idea shared on food.com harvest feed.",
+    "label": {
+      "ingredient": "carrot",
+      "local": true,
+      "co2": 0.3
+    }
+  },
+  {
+    "input": "crispy baked tofu bites | ingredients: 16 ounces extra firm tofu, 2 tablespoon cornstarch, 1 tablespoon soy sauce, 1 teaspoon garlic powder | description: airy snack from food.com vegan swaps.",
+    "label": {
+      "ingredient": "tofu",
+      "local": true,
+      "co2": 2.0
+    }
+  },
+  {
+    "input": "lemony farro salad | ingredients: 2 cups cooked farro, 1 cup arugula, 0.5 cup cherry tomatoes, 2 tablespoon lemon juice, 2 tablespoon olive oil | description: whole grain bowl on food.com mediterranean board.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  },
+  {
+    "input": "oat banana pancakes | ingredients: 1 cup oats, 1 banana, 2 eggs, 0.5 teaspoon baking powder | description: breakfast remix from food.com griddle fest.",
+    "label": {
+      "ingredient": "banana",
+      "local": false,
+      "co2": 0.9
+    }
+  },
+  {
+    "input": "smoky tempeh blt | ingredients: 6 ounces tempeh, 4 slices whole wheat bread, 2 tablespoon vegan mayo, 2 leaves lettuce, 2 slices tomato | description: plant sandwich version recorded on food.com.",
+    "label": {
+      "ingredient": "tomato",
+      "local": true,
+      "co2": 0.8
+    }
+  }
+]
