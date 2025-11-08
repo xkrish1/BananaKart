@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from packages.nlp_engine.parser import parse_recipe
-from services.supabase_client import insert_recipe, supabase
+from ..services.supabase_client import insert_recipe, supabase
 
 router = APIRouter()
 

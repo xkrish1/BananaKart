@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from packages.simulation_engine.montecarlo import run_simulation
-from services.supabase_client import insert_eco_result
+from ..services.supabase_client import insert_eco_result
 
 router = APIRouter()
 
