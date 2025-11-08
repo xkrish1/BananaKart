@@ -6,7 +6,7 @@ ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 if ROOT_PATH not in sys.path:
     sys.path.append(ROOT_PATH)
 
-from core.env_loader import load_env
+from .core.env_loader import load_env
 
 load_env()
 
