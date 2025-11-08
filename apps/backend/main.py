@@ -2,15 +2,30 @@
 import os
 import sys
 
+from core.env_loader import load_env
+
 ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 if ROOT_PATH not in sys.path:
     sys.path.append(ROOT_PATH)
 
-from fastapi import FastAPI
+load_env()
 
-from .routes import analyze, simulate
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from .routes import analyze, health, simulate
 
 app = FastAPI(title="BananaKart API")
 
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(health.router, tags=["system"])
 app.include_router(analyze.router, prefix="/analyze", tags=["analysis"])
 app.include_router(simulate.router, prefix="/simulate", tags=["simulation"])
