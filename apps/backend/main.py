@@ -1,7 +1,14 @@
 """FastAPI entrypoint for BananaKart backend."""
+import os
+import sys
+
+ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+if ROOT_PATH not in sys.path:
+    sys.path.append(ROOT_PATH)
+
 from fastapi import FastAPI
 
-from routes import analyze, simulate
+from .routes import analyze, simulate
 
 app = FastAPI(title="BananaKart API")
 
