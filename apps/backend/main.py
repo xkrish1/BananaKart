@@ -17,7 +17,12 @@ from .routes import analyze, health, simulate
 
 app = FastAPI(title="BananaKart API")
 
-origins = ["*"]
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://green-kart-view.vercel.app",
+    "https://bananakart.tech",
+]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

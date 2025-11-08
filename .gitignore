@@ -1,6 +1,8 @@
-node_modules
+.venv/
+node_modules/
 
 # Environment
 .env
 .env.local
 .env.*
+!.env.example
