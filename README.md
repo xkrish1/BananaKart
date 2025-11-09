@@ -1,70 +1,102 @@
 # BananaKart
 
-Unified monorepo for the BananaKart platform. The repository contains the FastAPI backend and the Next.js/Vite frontend alongside shared packages and Supabase schema files.
+BananaKart pairs recipe personalisation with eco-aware supply chain estimates. The backend orchestrates tuned NLP inference, Monte Carlo simulations, and Supabase persistence, while the Vite frontend keeps the experience responsive for shoppers.
+
+## Tech Stack
+
+- FastAPI backend deployed on Render
+- Vite + React frontend deployed on Vercel
+- Supabase Postgres + storage for persistence
+- Hugging Face Inference API for the tuned NLP model
 
 ## Repository Layout
 
-- `apps/backend` – FastAPI application exposed on Render.
-- `apps/frontend` – Public-facing frontend imported via git subtree (`green-kart-view`).
-- `packages` – Reusable Python packages (NLP, simulation engine, shared utils).
-- `supabase` – Database schema and seed scripts.
+- `apps/backend` – FastAPI service exposing `/analyze`
+- `apps/frontend` – Vite client application
+- `packages` – Shared Python utilities (simulation + NLP helpers)
+- `supabase` – Database schema, seed data, and configuration
 
-## Environment Variables
+## Getting Started
 
-Environment configuration for both services is centralised in `.env.example`. Copy it to `.env` (backend) or `.env.local` (frontend) and populate the placeholders:
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- Supabase project credentials (service role key)
+- Hugging Face API token with access to `your-username/bananakart-tuned-model`
 
-```env
-# Backend (Render)
-SUPABASE_URL=https://bkuszlqybwjpekstjapo.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=<service_key>
-OPENWEATHER_KEY=<key>
-TOMTOM_KEY=<key>
-
-# Frontend (Vercel)
-NEXT_PUBLIC_SUPABASE_URL=https://bkuszlqybwjpekstjapo.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon_key>
-BACKEND_URL=https://bananakart-backend.onrender.com
-MAPBOX_TOKEN=<mapbox_token>
-```
-
-Commit secrets to project dashboards only—never to git.
-
-## Deployment
-
-### Render (Backend)
-
-- Render reads `render.yaml` at the repo root and deploys only the FastAPI service.
-- Environment variables: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `OPENWEATHER_KEY`, `TOMTOM_KEY`.
-- Trigger a manual redeploy after merging frontend changes into `main`.
-
-### Vercel (Frontend)
-
-- Connect the same GitHub repository.
-- Project Settings → Root Directory: `apps/frontend`.
-- Configure environment variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `BACKEND_URL`, `MAPBOX_TOKEN`.
-
-## Local Development
-
+### Installation
 ```bash
+git clone https://github.com/your-org/bananakart.git
+cd bananakart
+
 # Backend
-PYTHONPATH=. uvicorn apps.backend.main:app --reload
+python -m venv venv && source venv/bin/activate
+pip install -r apps/backend/requirements.txt
 
 # Frontend
 cd apps/frontend
 npm install
+```
+
+### Environment Configuration
+
+Create `apps/backend/.env`:
+```env
+SUPABASE_URL=https://bkuszlqybwjpekstjapo.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+HF_API_KEY=hf_<your_token>
+```
+
+Create `apps/frontend/.env`:
+```env
+VITE_API_URL=https://bananakart.onrender.com
+```
+
+## Running & Deployment
+
+```bash
+# Backend (development)
+PYTHONPATH=. uvicorn apps.backend.main:app --reload
+
+# Frontend (development)
+cd apps/frontend
 npm run dev
 ```
 
-Visit `http://localhost:3000/analyze`, submit a recipe, and confirm requests reach the backend at `http://127.0.0.1:8000`.
+- Render deploys `apps/backend` automatically on push to `main`.
+- Vercel deploys `apps/frontend` with the same branch. Ensure the environment variables above are set in the respective dashboards.
 
-## Production Verification Checklist
+### Demo
 
-| Check                         | Status | Notes                                  |
-| ----------------------------- | ------ | -------------------------------------- |
-| Repo structure merged         | ☐      | `apps/frontend` present                |
-| `.env.example` unified        | ☐      | Root file committed                    |
-| Backend builds on Render      | ☐      | Verify `/health` returns 200           |
-| Frontend builds on Vercel     | ☐      | Verify homepage loads                  |
-| Frontend → Backend requests   | ☐      | Network tab shows successful API calls |
-| CORS configuration            | ☐      | Origins include Vercel + bananakart.tech |
-| Supabase write/read           | ☐      | Recipes + eco_results appear           |
+- Production API: https://bananakart.onrender.com/analyze
+
+## Example API Usage
+
+```bash
+curl -X POST https://bananakart.onrender.com/analyze \
+  -H "Content-Type: application/json" \
+  -d '{
+        "user_id": "test-user",
+        "recipe_text": "pasta with tomato sauce",
+        "urgency": "tonight"
+      }'
+```
+
+Example JSON response:
+
+```json
+{
+  "status": "ok",
+  "eco_score": 0.91,
+  "co2_saved": 1.55,
+  "variance_cost": 0.1,
+  "recipe_id": "9f9580ac-6f9b-4ac0-8abc-9cc58f5b9f9b"
+}
+```
+
+## Production Checklist
+
+- Repo structure matches the monorepo layout (`apps`, `supabase`, `.env` files, `README.md`)
+- Hugging Face credentials configured via `HF_API_KEY`
+- Supabase tables `recipes` and `eco_results` contain the tuned model output
+- Render and Vercel deployments succeed after each push to `main`
