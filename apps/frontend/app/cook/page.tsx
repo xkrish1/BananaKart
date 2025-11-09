@@ -5,21 +5,27 @@ import { useState } from "react";
 const CookPage = () => {
   const [text, setText] = useState("");
   const [servings, setServings] = useState<number>(1);
+  const [zipcode, setZipcode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setNotice(null);
     setResult(null);
     try {
       const payload: Record<string, unknown> = { text };
       if (servings && servings > 0) {
         payload.servings = servings;
       }
-      const res = await fetch("/analyze_or_generate", {
+      if (zipcode.trim()) {
+        payload.zipcode = zipcode.trim();
+      }
+      const res = await fetch("/llm_recipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -29,7 +35,12 @@ const CookPage = () => {
         throw new Error(detail || "Request failed");
       }
       const data = await res.json();
+      if (data.response_type === "need_zip") {
+        setNotice(data.message ?? "Please provide your ZIP code.");
+        return;
+      }
       setResult(data);
+      setNotice(data.message ?? null);
     } catch (err: any) {
       setError(err.message ?? "Unexpected error");
     } finally {
@@ -38,9 +49,9 @@ const CookPage = () => {
   };
 
   const handleSource = () => {
-    if (!result?.ingredients) return;
+    if (!result?.recipe?.ingredients) return;
     window.dispatchEvent(
-      new CustomEvent("bananakart:source", { detail: result.ingredients })
+      new CustomEvent("bananakart:source", { detail: result.recipe.ingredients })
     );
   };
 
@@ -70,6 +81,16 @@ const CookPage = () => {
             onChange={(e) => setServings(Number(e.target.value) || 1)}
           />
         </label>
+        <label className="flex w-full max-w-[200px] flex-col gap-2">
+          <span className="text-sm font-medium">ZIP Code</span>
+          <input
+            type="text"
+            className="rounded border border-gray-300 p-2"
+            value={zipcode}
+            onChange={(e) => setZipcode(e.target.value)}
+            placeholder="02108"
+          />
+        </label>
         <button
           type="submit"
           className="inline-flex items-center justify-center rounded bg-emerald-600 px-4 py-2 font-medium text-white hover:bg-emerald-700"
@@ -85,22 +106,25 @@ const CookPage = () => {
         </div>
       )}
 
+      {notice && !result && (
+        <div className="rounded border border-blue-200 bg-blue-50 p-3 text-sm text-blue-700">
+          {notice}
+        </div>
+      )}
+
       {result && (
         <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
-              Mode: {result.mode === "parse" ? "Parse" : "Generate"}
+          <div className="flex flex-col gap-2">
+            <span className="rounded bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
+              {notice ?? "Recipe plan ready"}
             </span>
-            {result.servings && (
-              <span className="text-sm text-gray-600">
-                Servings: {result.servings}{" "}
-                {result.servings_assumed ? "(assumed)" : ""}
-              </span>
-            )}
+            <span className="text-sm text-gray-600">
+              Servings: {result.recipe?.servings ?? servings}
+            </span>
           </div>
 
-          {result.title && (
-            <h2 className="text-2xl font-semibold">{result.title}</h2>
+          {result.recipe?.title && (
+            <h2 className="text-2xl font-semibold">{result.recipe.title}</h2>
           )}
 
           <div>
@@ -115,7 +139,7 @@ const CookPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.ingredients?.map((item: any, idx: number) => (
+                  {result.recipe?.ingredients?.map((item: any, idx: number) => (
                     <tr key={idx}>
                       <td className="border border-gray-200 px-3 py-2">
                         {item?.name ?? ""}
@@ -133,16 +157,72 @@ const CookPage = () => {
             </div>
           </div>
 
-          {result.mode === "generate" && result.steps?.length > 0 && (
+          {result.recipe?.steps?.length > 0 && (
             <div>
               <h3 className="text-lg font-medium">Steps</h3>
               <ol className="list-decimal space-y-2 pl-5 text-sm text-gray-700">
-                {result.steps.map((step: string, idx: number) => (
+                {result.recipe.steps.map((step: string, idx: number) => (
                   <li key={idx}>{step}</li>
                 ))}
               </ol>
             </div>
           )}
+
+          {result.sourcing?.farmers_markets?.length ? (
+            <div>
+              <h3 className="text-lg font-medium">Farmers Markets</h3>
+              <div className="space-y-2 text-sm text-gray-700">
+                {result.sourcing.farmers_markets.map(
+                  (entry: any, idx: number) => (
+                    <div key={idx} className="rounded border border-emerald-200 p-3">
+                      <div className="font-semibold text-emerald-700">
+                        {entry.market?.name}
+                      </div>
+                      <div className="text-gray-600">
+                        {entry.market?.address} • {entry.market?.hours}
+                      </div>
+                      <ul className="mt-2 list-disc pl-5">
+                        {entry.items?.map((item: any, itemIdx: number) => (
+                          <li key={itemIdx}>
+                            {item?.name}{" "}
+                            {item?.quantity != null
+                              ? `• ${item.quantity}`
+                              : ""}{" "}
+                            {item?.unit ?? ""}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          ) : null}
+
+          {result.sourcing?.big_box?.length ? (
+            <div>
+              <h3 className="text-lg font-medium">Big-Box Options</h3>
+              <div className="space-y-2 text-sm text-gray-700">
+                {result.sourcing.big_box.map((entry: any, idx: number) => (
+                  <div key={idx} className="rounded border border-gray-200 p-3">
+                    <div className="font-semibold text-gray-800">
+                      {entry.store?.name}
+                    </div>
+                    <div className="text-gray-600">{entry.store?.address}</div>
+                    <ul className="mt-2 list-disc pl-5">
+                      {entry.items?.map((item: any, itemIdx: number) => (
+                        <li key={itemIdx}>
+                          {item?.name}{" "}
+                          {item?.quantity != null ? `• ${item.quantity}` : ""}{" "}
+                          {item?.unit ?? ""}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           <button
             type="button"

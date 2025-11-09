@@ -1,0 +1,14 @@
+[
+  {
+    "name": "MetroMart",
+    "address": "400 Central Ave, Boston, MA",
+    "hours": "Daily 7:00-22:00",
+    "inventory": ["pasta", "flour", "sugar", "milk", "butter", "cheese", "eggs", "spices"]
+  },
+  {
+    "name": "CityWholesale",
+    "address": "250 Warehouse Rd, Boston, MA",
+    "hours": "Mon-Sat 8:00-20:00",
+    "inventory": ["produce", "sauces", "frozen", "oil", "snacks", "seafood"]
+  }
+]
