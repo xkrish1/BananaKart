@@ -1,4 +1,4 @@
-"""LLM helper for recipe generation via OpenAI (mock-friendly)."""
+"""LLM helper for recipe generation via Gemini (mock-friendly)."""
 from __future__ import annotations
 
 import json
@@ -7,8 +7,8 @@ from typing import Any, Dict
 
 import requests
 
-OPENAI_API_URL = "https://api.openai.com/v1/chat/completions"
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-pro")
 
 
 def _build_prompt(query: str, servings: int) -> str:
@@ -39,35 +39,39 @@ def _fallback_recipe(query: str, servings: int) -> Dict[str, Any]:
 
 
 def generate_recipe(query: str, servings: int = 1) -> Dict[str, Any]:
-    """Call OpenAI's chat API to generate a structured recipe.
+    """Call Gemini's API to generate a structured recipe.
 
     Falls back to a deterministic mock if the API key is missing or the call fails.
     """
 
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         return _fallback_recipe(query, servings)
 
     prompt = _build_prompt(query, servings)
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-    }
+    headers = {"Content-Type": "application/json"}
     payload = {
-        "model": OPENAI_MODEL,
-        "messages": [
-            {"role": "system", "content": "You return only valid JSON."},
-            {"role": "user", "content": prompt},
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": "You return only valid JSON."}, {"text": prompt}],
+            }
         ],
-        "temperature": 0.2,
-        "max_tokens": 600,
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 600},
     }
 
     try:
-        response = requests.post(OPENAI_API_URL, headers=headers, json=payload, timeout=30)
+        url = GEMINI_API_URL.format(model=GEMINI_MODEL)
+        response = requests.post(url, headers=headers, params={"key": api_key}, json=payload, timeout=30)
         response.raise_for_status()
         data = response.json()
-        content = data["choices"][0]["message"]["content"]
+        candidates = data.get("candidates") or []
+        if not candidates:
+            raise ValueError("No candidates returned from Gemini")
+        parts = candidates[0].get("content", {}).get("parts", [])
+        if not parts:
+            raise ValueError("Gemini response missing parts")
+        content = parts[0].get("text", "")
         recipe = json.loads(content)
         if not isinstance(recipe, dict):
             raise ValueError("Unexpected recipe payload")
