@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from packages.nlp_engine.parser import parse_recipe
-from ..services.supabase_client import insert_recipe, supabase
+from ..services.supabase_client import get_client, insert_recipe
 
 router = APIRouter()
 
@@ -94,7 +94,8 @@ async def analyze_recipe(payload: AnalyzeRequest) -> JSONResponse:
 
     if ingredient_records:
         try:
-            supabase.table("ingredients").insert(ingredient_records).execute()
+            client = get_client()
+            client.table("ingredients").insert(ingredient_records).execute()
         except Exception as exc:  # pylint: disable=broad-except
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Failed to store ingredients: {exc}") from exc
 
