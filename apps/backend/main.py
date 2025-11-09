@@ -12,8 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from apps.backend.services.supabase_client import insert_eco_result, insert_recipe
-from apps.backend.routes import auto
+from services.supabase_client import insert_eco_result, insert_recipe
+from routes import auto
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
