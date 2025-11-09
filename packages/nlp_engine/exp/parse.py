@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -18,11 +17,9 @@ from transformers import (
     AutoTokenizer,
 )
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 NER_MODEL_DIR = PROJECT_ROOT / "model" / "token_classification"
 CLS_MODEL_DIR = PROJECT_ROOT / "model" / "text_classification"
-NER_MODEL_ID = os.getenv("NER_MODEL_ID", "xkrish/ingredient-ner-distilbert")
-CLS_MODEL_ID = os.getenv("CLS_MODEL_ID", "xkrish/urgency-classifier-distilbert")
 
 MAX_LEN_NER = 256
 MAX_LEN_CLS = 128
@@ -71,37 +68,22 @@ class EntitySpan:
     text: str
 
 
-def _use_local_models() -> bool:
-    return os.getenv("USE_LOCAL_NLP", "false").strip().lower() in {"1", "true", "yes", "on"}
-
-
 def _ensure_models_loaded() -> None:
+    if not NER_MODEL_DIR.exists() or not CLS_MODEL_DIR.exists():
+        raise FileNotFoundError(
+            "Model checkpoints not found. Train models with "
+            "`python train_token_classification.py` and "
+            "`python train_text_classification.py` first."
+        )
+
     global _NER_RESOURCES, _CLS_RESOURCES
     if _NER_RESOURCES is None:
-        source: str | Path
-        if _use_local_models():
-            if not NER_MODEL_DIR.exists():
-                raise FileNotFoundError(
-                    f"Local NER checkpoint not found at {NER_MODEL_DIR}. "
-                    "Train models or set USE_LOCAL_NLP=false to pull from Hugging Face Hub."
-                )
-            source = NER_MODEL_DIR
-        else:
-            source = NER_MODEL_ID or NER_MODEL_DIR
-            if isinstance(source, Path) and not source.exists():
-                source = NER_MODEL_ID
-        tokenizer = AutoTokenizer.from_pretrained(source)
-        model = AutoModelForTokenClassification.from_pretrained(source)
+        tokenizer = AutoTokenizer.from_pretrained(NER_MODEL_DIR)
+        model = AutoModelForTokenClassification.from_pretrained(NER_MODEL_DIR)
         model.to(_DEVICE)
         model.eval()
-        if Path(source).is_dir():
-            label_path = Path(source) / "label2id.json"
-            if not label_path.exists():
-                raise FileNotFoundError(f"Expected label2id.json in {label_path.parent}")
-            with label_path.open("r", encoding="utf-8") as f:
-                label2id = {label: int(idx) for label, idx in json.load(f).items()}
-        else:
-            label2id = model.config.label2id
+        with (NER_MODEL_DIR / "label2id.json").open("r", encoding="utf-8") as f:
+            label2id = {label: int(idx) for label, idx in json.load(f).items()}
         id2label = {idx: label for label, idx in label2id.items()}
         _NER_RESOURCES = {
             "tokenizer": tokenizer,
@@ -111,30 +93,12 @@ def _ensure_models_loaded() -> None:
         }
 
     if _CLS_RESOURCES is None:
-        source: str | Path
-        if _use_local_models():
-            if not CLS_MODEL_DIR.exists():
-                raise FileNotFoundError(
-                    f"Local classifier checkpoint not found at {CLS_MODEL_DIR}. "
-                    "Train models or set USE_LOCAL_NLP=false to pull from Hugging Face Hub."
-                )
-            source = CLS_MODEL_DIR
-        else:
-            source = CLS_MODEL_ID or CLS_MODEL_DIR
-            if isinstance(source, Path) and not source.exists():
-                source = CLS_MODEL_ID
-        tokenizer = AutoTokenizer.from_pretrained(source)
-        model = AutoModelForSequenceClassification.from_pretrained(source)
+        tokenizer = AutoTokenizer.from_pretrained(CLS_MODEL_DIR)
+        model = AutoModelForSequenceClassification.from_pretrained(CLS_MODEL_DIR)
         model.to(_DEVICE)
         model.eval()
-        if Path(source).is_dir():
-            label_path = Path(source) / "label2id.json"
-            if not label_path.exists():
-                raise FileNotFoundError(f"Expected label2id.json in {label_path.parent}")
-            with label_path.open("r", encoding="utf-8") as f:
-                label2id = {label: int(idx) for label, idx in json.load(f).items()}
-        else:
-            label2id = model.config.label2id
+        with (CLS_MODEL_DIR / "label2id.json").open("r", encoding="utf-8") as f:
+            label2id = {label: int(idx) for label, idx in json.load(f).items()}
         id2label = {idx: label for label, idx in label2id.items()}
         _CLS_RESOURCES = {
             "tokenizer": tokenizer,
@@ -434,53 +398,11 @@ def parse(text: str, tz: str = "America/New_York") -> Dict[str, object]:
     ingredients = _apply_fallback_quantities(text, ingredient_spans, ingredients)
     meal_time = _infer_meal_time(urgency=urgency, tz=tz, text=text)
 
-    result = {
+    return {
         "ingredients": ingredients,
         "urgency": urgency,
         "meal_time": meal_time,
     }
-
-    # --- normalization & tighter spans ---
-    def normalize_units(u: Optional[str]) -> Optional[str]:
-        if not u:
-            return u
-        value = u.lower().strip(".")
-        mapping = {
-            "t": "tsp",
-            "tspn": "tsp",
-            "teaspoon": "tsp",
-            "teaspoons": "tsp",
-            "tb": "tbsp",
-            "tbspn": "tbsp",
-            "tablespoon": "tbsp",
-            "tablespoons": "tbsp",
-            "gms": "g",
-            "gram": "g",
-            "grams": "g",
-            "kg": "g",
-            "kgs": "g",
-            "oz": "g",
-            "lb": "g",
-            "lbs": "g",
-            "clove": "clove",
-            "cloves": "clove",
-            "cup": "cup",
-            "cups": "cup",
-        }
-        return mapping.get(value, value)
-
-    def tighten_name(name: Optional[str]) -> Optional[str]:
-        if not name:
-            return name
-        refined = name.strip(",. ")
-        refined = re.sub(r"^(and|with|of|in|the|a|an)\b", "", refined, flags=re.IGNORECASE)
-        return refined.strip()
-
-    for ing in result["ingredients"]:
-        ing["unit"] = normalize_units(ing.get("unit"))
-        ing["name"] = tighten_name(ing.get("name"))
-
-    return result
 
 
 if __name__ == "__main__":

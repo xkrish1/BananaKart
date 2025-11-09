@@ -1,0 +1,11 @@
+torch
+transformers
+datasets
+accelerate
+evaluate
+numpy
+pandas
+spacy
+dateparser
+rich
+rapidfuzz
