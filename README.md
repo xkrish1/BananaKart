@@ -22,7 +22,9 @@ BananaKart pairs recipe personalisation with eco-aware supply chain estimates. T
 - Python 3.11+
 - Node.js 18+
 - Supabase project credentials (service role key)
-- Hugging Face API token with access to `your-username/bananakart-tuned-model`
+- Hugging Face API token with access to:
+  - `xkrish/ingredient-ner-distilbert`
+  - `xkrish/urgency-classifier-distilbert`
 
 ### Installation
 ```bash
@@ -45,6 +47,7 @@ Create `apps/backend/.env`:
 SUPABASE_URL=https://bkuszlqybwjpekstjapo.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
 HF_API_KEY=hf_<your_token>
+USE_LOCAL_NLP=false
 ```
 
 Create `apps/frontend/.env`:
@@ -52,7 +55,15 @@ Create `apps/frontend/.env`:
 VITE_API_URL=https://bananakart.onrender.com
 ```
 
-## Running & Deployment
+### NLP Smoke Test
+
+Run the parser locally against the trained checkpoints (set `USE_LOCAL_NLP=true` to avoid pulling from the Hub):
+
+```bash
+USE_LOCAL_NLP=true python -c "from packages.nlp_engine.parser import parse; print(parse('make pasta with 200 g penne and 2 tbsp olive oil tonight'))"
+```
+
+### Running & Deployment
 
 ```bash
 # Backend (development)
@@ -69,6 +80,7 @@ npm run dev
 ### Demo
 
 - Production API: https://bananakart.onrender.com/analyze
+- Hugging Face Space (interactive demo): https://huggingface.co/spaces/xkrish/bananakart
 
 ## Example API Usage
 

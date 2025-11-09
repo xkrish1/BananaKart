@@ -4,3 +4,11 @@ node_modules/
 dist/
 .env
 *.env
+
+# NLP artifacts
+packages/nlp_engine/model/
+packages/nlp_engine/exp/cache/
+packages/nlp_engine/exp/outputs/
+packages/nlp_engine/exp/model/
+packages/nlp_engine/exp/data/normalized/
+packages/nlp_engine/model/text_classification/
