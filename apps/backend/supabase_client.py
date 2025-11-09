@@ -19,15 +19,21 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 
 
-def insert_recipe(user_id: str, recipe_text: str, urgency: str) -> Optional[Dict[str, Any]]:
+def insert_recipe(user_id: str, recipe_text: str, urgency: str) -> Dict[str, Any]:
     try:
-        # Generate random UUID if invalid or placeholder
         try:
             uuid.UUID(user_id)
         except Exception:
             user_id = str(uuid.uuid4())
 
-        response = (
+        supabase.table("users").upsert(
+            {
+                "id": user_id,
+                "email": f"{user_id[:6]}@demo.bananakart.ai",
+            }
+        ).execute()
+
+        result = (
             supabase.table("recipes")
             .insert(
                 {
@@ -38,11 +44,11 @@ def insert_recipe(user_id: str, recipe_text: str, urgency: str) -> Optional[Dict
             )
             .execute()
         )
-        return response.data[0] if response.data else None
+        return result.data[0] if result.data else {}
     except Exception as exc:  # pylint: disable=broad-except
-        print(f"Error inserting recipe: {exc}")
+        print("Error inserting recipe:", exc)
         traceback.print_exc()
-        return None
+        return {}
 
 
 def insert_eco_result(

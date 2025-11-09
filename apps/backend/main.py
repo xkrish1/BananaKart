@@ -66,7 +66,11 @@ def root():
 def analyze_recipe(data: RecipeInput):
     try:
         # Step 1: Hugging Face inference
-        model_score = _call_hf_inference(data.recipe_text)
+        try:
+            model_score = _call_hf_inference(data.recipe_text)
+        except Exception as exc:  # pylint: disable=broad-except
+            print("HF inference failed:", exc)
+            model_score = None
         score = model_score if model_score is not None else 0.8
 
         # Step 2: Monte Carlo simulation
