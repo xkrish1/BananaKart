@@ -3,7 +3,4 @@ uvicorn
 pydantic
 requests
 supabase
-transformers
-torch
-numpy
 python-dotenv
