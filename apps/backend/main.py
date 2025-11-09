@@ -1,24 +1,66 @@
+import logging
 import os
 import random
 import traceback
-from typing import Any, Optional
+from collections import defaultdict, deque
+from time import time
+from typing import Any, Deque, Dict, Optional
 
 import requests
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from supabase_client import insert_eco_result, insert_recipe
+from apps.backend.services.supabase_client import insert_eco_result, insert_recipe
+from apps.backend.routes import auto
+
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
+logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
+logger = logging.getLogger(__name__)
+
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS")
+if allowed_origins_env:
+    ALLOWED_ORIGINS = [origin.strip() for origin in allowed_origins_env.split(",") if origin.strip()]
+else:
+    ALLOWED_ORIGINS = ["*"]
+
+RATE_LIMIT = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+_REQUEST_LOG: Dict[str, Deque[float]] = defaultdict(deque)
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["POST", "OPTIONS"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    if RATE_LIMIT <= 0:
+        return await call_next(request)
+
+    client_host = request.client.host if request.client else "unknown"
+    now = time()
+    window_start = now - 60
+    bucket = _REQUEST_LOG[client_host]
+
+    while bucket and bucket[0] < window_start:
+        bucket.popleft()
+
+    if len(bucket) >= RATE_LIMIT:
+        logger.warning("Rate limit exceeded for %s", client_host)
+        return JSONResponse(status_code=429, content={"error": "rate limit exceeded"})
+
+    bucket.append(now)
+    return await call_next(request)
+
+
+app.include_router(auto.router)
 
 HF_MODEL = "xkrish/urgency-classifier-distilbert"
 HF_API_KEY = os.getenv("HF_API_KEY")

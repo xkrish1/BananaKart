@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r packages/nlp_engine/exp/requirements.txt pytest
-      - run: pytest -q packages/nlp_engine/exp/tests || true
+      - run: pytest -q packages/nlp_engine/exp/tests
