@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Downtown Harvest Market",
+    "zipcode": "02108",
+    "address": "100 Main St, Boston, MA",
+    "hours": "Sat 8:00-13:00",
+    "products": ["vegetables", "fruit", "bread"]
+  },
+  {
+    "name": "Seaport Farmers Collective",
+    "zipcode": "02110",
+    "address": "200 Seaport Blvd, Boston, MA",
+    "hours": "Sun 9:00-14:00",
+    "products": ["seafood", "greens", "flowers"]
+  },
+  {
+    "name": "Cambridge Fresh",
+    "zipcode": "02139",
+    "address": "50 River St, Cambridge, MA",
+    "hours": "Wed 11:00-17:00",
+    "products": ["dairy", "honey", "fruit"]
+  },
+  {
+    "name": "Somerville Roots",
+    "zipcode": "02144",
+    "address": "15 Market Sq, Somerville, MA",
+    "hours": "Thu 12:00-18:00",
+    "products": ["vegetables", "baked goods", "eggs"]
+  },
+  {
+    "name": "Brookline Greenway",
+    "zipcode": "02445",
+    "address": "75 Cypress St, Brookline, MA",
+    "hours": "Tue 10:00-15:00",
+    "products": ["organic produce", "maple syrup", "flowers"]
+  }
+]

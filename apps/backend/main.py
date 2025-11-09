@@ -13,7 +13,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 from services.supabase_client import insert_eco_result, insert_recipe
-from routes import auto
+from routes import auto, llm_demo
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 logging.basicConfig(level=getattr(logging, LOG_LEVEL, logging.INFO))
@@ -61,6 +61,7 @@ async def rate_limit_middleware(request: Request, call_next):
 
 
 app.include_router(auto.router)
+app.include_router(llm_demo.router)
 
 HF_MODEL = "xkrish/urgency-classifier-distilbert"
 HF_API_KEY = os.getenv("HF_API_KEY")
