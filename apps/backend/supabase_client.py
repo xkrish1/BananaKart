@@ -1,4 +1,5 @@
 import os
+import uuid
 import traceback
 from typing import Any, Dict, List, Optional
 
@@ -18,8 +19,13 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 
 def insert_recipe(user_id: str, recipe_text: str, urgency: str) -> Optional[Dict[str, Any]]:
-    """Insert a recipe row and return the inserted record."""
     try:
+        # Generate random UUID if invalid or placeholder
+        try:
+            uuid.UUID(user_id)
+        except Exception:
+            user_id = str(uuid.uuid4())
+
         response = (
             supabase.table("recipes")
             .insert(

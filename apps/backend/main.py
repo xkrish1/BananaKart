@@ -20,7 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-HF_MODEL = "your-username/bananakart-tuned-model"  # update once uploaded to Hugging Face
+HF_MODEL = "xkrish/urgency-classifier-distilbert"
 HF_API_KEY = os.getenv("HF_API_KEY")
 
 
