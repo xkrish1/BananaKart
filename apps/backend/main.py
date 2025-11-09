@@ -1,8 +1,10 @@
 import logging
 import os
 import random
+import sys
 import traceback
 from collections import defaultdict, deque
+from pathlib import Path
 from time import time
 from typing import Any, Deque, Dict, Optional
 
@@ -11,6 +13,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
 
 from services.supabase_client import insert_eco_result, insert_recipe
 from routes import auto
